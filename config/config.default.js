@@ -25,6 +25,9 @@ module.exports = appInfo => {
     },
   };
 
+  config.static = {
+    prefix: '/static/',
+  };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

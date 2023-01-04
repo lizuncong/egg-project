@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Cookie</title>
+    <style>
+    </style>
+</head>
+<body>
+    <button onclick="login()">登陆</button>
+    <button onclick="logout()">退出</button>
+</body>
+<script>
+    function login(){
+       fetch('/login', {
+        method: 'post',
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+            name: 'admin',
+            pwd: '123456'
+        })
+       })
+    }
+    function logout() {
+        fetch('/logout', {
+            method: 'post',
+            headers: {
+                "Content-type": "application/json"
+            },
+        })
+    }
+</script>
+</html>
