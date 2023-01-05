@@ -25,7 +25,7 @@ class UserController extends Controller {
   }
   async login() {
     const { ctx } = this;
-    const body = ctx.request.body;
+    const body = ctx.query;
     ctx.cookies.set('user', JSON.stringify(body), {
       maxAge: 1000 * 60 * 10,
       // httpOnly: false,
@@ -42,11 +42,21 @@ class UserController extends Controller {
     ctx.cookies.set('base64', this.encode('中文base64'));
     const base64 = this.decode(ctx.cookies.get('base64'));
     console.log('base64', base64);
+    // 保存session
+    ctx.session.user = body;
+    console.log('body..', body);
     ctx.body = {
       status: 200,
       data: body,
       username,
       base64,
+    };
+  }
+  async getSession() {
+    const { ctx } = this;
+    ctx.body = {
+      user: ctx.session.user,
+      test: 'hello',
     };
   }
   async logout() {
