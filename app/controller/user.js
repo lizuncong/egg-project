@@ -16,12 +16,20 @@ class UserController extends Controller {
   }
   async list() {
     const { ctx } = this;
-    await new Promise(resolve => {
-      setTimeout(() => {
-        resolve();
-      }, 3000);
-    });
-    ctx.body = [{ id: 123 }];
+    // await new Promise(resolve => {
+    //   setTimeout(() => {
+    //     resolve();
+    //   }, 3000);
+    // });
+    const res = await ctx.service.user.lists();
+    ctx.body = res;
+  }
+  async getUser() {
+    const { ctx } = this;
+    const res = await ctx.service.user.getUserById(Number(ctx.query.id));
+    ctx.body = {
+      data: res,
+    };
   }
   async login() {
     const { ctx } = this;

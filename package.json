@@ -7,7 +7,9 @@
     "declarations": true
   },
   "dependencies": {
+    "dayjs": "^1.11.7",
     "egg": "^3",
+    "egg-mysql": "^3.3.0",
     "egg-scripts": "^2",
     "egg-validate": "^2.0.2"
   },
