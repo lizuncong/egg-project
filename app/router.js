@@ -17,6 +17,11 @@ module.exports = app => {
   router.get('/user/detail2/:id', controller.user.detail2);
   router.get('/user/getse', controller.user.getSession);
   router.get('/user/getuser', controller.user.getUser);
+  router.get('/user/adduser', controller.user.addUser);
+  router.get('/user/edituser', controller.user.editUser);
+  router.get('/user/deluser', controller.user.delUser);
+  router.get('/user/findall', controller.user.findAll);
+
   router.post('/logout', controller.user.logout);
   router.get('/login', controller.user.login);
   router.post('/user/add', controller.user.add);

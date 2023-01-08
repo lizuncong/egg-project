@@ -42,3 +42,11 @@ $ npm stop
 
 ### 操作mysql数据库
 使用egg-mysql操作mysql数据库
+
+
+### sequelize
+orm框架
+- yarn add egg-sequelize mysql2
+- 配置
+    - config/plugin.js
+    - config/config.default.js

@@ -11,7 +11,9 @@
     "egg": "^3",
     "egg-mysql": "^3.3.0",
     "egg-scripts": "^2",
-    "egg-validate": "^2.0.2"
+    "egg-sequelize": "^6.0.0",
+    "egg-validate": "^2.0.2",
+    "mysql2": "^2.3.3"
   },
   "devDependencies": {
     "egg-bin": "^5",

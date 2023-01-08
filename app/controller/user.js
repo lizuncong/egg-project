@@ -14,23 +14,8 @@ class UserController extends Controller {
     const user = ctx.cookies.get('user');
     ctx.body = user || 'cookie没有值';
   }
-  async list() {
-    const { ctx } = this;
-    // await new Promise(resolve => {
-    //   setTimeout(() => {
-    //     resolve();
-    //   }, 3000);
-    // });
-    const res = await ctx.service.user.lists();
-    ctx.body = res;
-  }
-  async getUser() {
-    const { ctx } = this;
-    const res = await ctx.service.user.getUserById(Number(ctx.query.id));
-    ctx.body = {
-      data: res,
-    };
-  }
+
+
   async login() {
     const { ctx } = this;
     const body = ctx.query;
@@ -91,7 +76,83 @@ class UserController extends Controller {
     ctx.validate(rule);
     ctx.body = ctx.request.body;
   }
+  async list() {
+    const { ctx } = this;
+    // await new Promise(resolve => {
+    //   setTimeout(() => {
+    //     resolve();
+    //   }, 3000);
+    // });
+    const res = await ctx.service.user.lists();
+    ctx.body = res;
+  }
+  async addUser() {
+    const { ctx } = this;
+    // const res = await ctx.service.user.add(ctx.query);
+    const res = await ctx.model.User.create(ctx.query);
 
+    ctx.body = {
+      res,
+      status: 200,
+    };
+  }
+  async editUser() {
+    const { ctx } = this;
+    // const res = await ctx.service.user.edit(ctx.query);
+    const user = await ctx.model.User.findByPk(ctx.query.id);
+    if (!user) {
+      ctx.body = {
+        status: 404,
+        errMsg: 'id不存在',
+      };
+      return;
+    }
+    const res = await user.update(ctx.query);
+    ctx.body = {
+      res,
+      status: 200,
+    };
+  }
+  async findAll() {
+    const { ctx } = this;
+    // await new Promise(resolve => {
+    //   setTimeout(() => {
+    //     resolve();
+    //   }, 3000);
+    // });
+    const res = await ctx.model.User.findAll({
+      where: {
+        id: 2,
+      },
+    });
+    ctx.body = res;
+  }
+  async getUser() {
+    const { ctx } = this;
+    // const res = await ctx.service.user.getUserById(Number(ctx.query.id));
+    const res = await ctx.model.User.findByPk(ctx.query.id);
+
+    ctx.body = {
+      data: res,
+    };
+  }
+  async delUser() {
+    const { ctx } = this;
+    // const res = await ctx.service.user.delete(ctx.query.id);
+    const user = await ctx.model.User.findByPk(ctx.query.id);
+    if (!user) {
+      ctx.body = {
+        status: 404,
+        errMsg: 'id不存在',
+      };
+      return;
+    }
+    const res = await user.destroy(ctx.query.id);
+    ctx.body = {
+      res,
+      status: 200,
+    };
+  }
   async edit() {
     const { ctx } = this;
     ctx.body = ctx.request.body;

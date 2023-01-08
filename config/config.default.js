@@ -54,6 +54,18 @@ module.exports = appInfo => {
       database: 'lang_admin',
     },
   };
+  config.sequelize = {
+    dialect: 'mysql',
+    host: '127.0.0.1',
+    port: '3306',
+    user: 'root',
+    password: 'root123456',
+    database: 'lang_admin',
+    define: {
+      timestamps: false, // 自动添加时间相关字段
+      freezeTableName: true, // 冻结表名称
+    },
+  };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
